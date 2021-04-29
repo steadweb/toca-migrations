@@ -2,10 +2,15 @@ const process = require('process');
 const AWS = require("aws-sdk");
 const codebuild = new AWS.CodeBuild({apiVersion: '2016-10-06'});
 
-codebuild.startBuild({ projectName: "bookings-api-dev-toca-social"}, async (err, data) => {
+if(!process.env.JOB_NAME) {
+  console.log("JOB_NAME env variable must be set")
+  process.exit(1);
+}
+
+codebuild.startBuild({ projectName: process.env.JOB_NAME}, async (err, data) => {
   console.log(data);  
-  const limit = 30; // 5 minutes 
-  const timeout = 10000; // 10 seconds
+  const limit = 30; 
+  const timeout = 10000;
   let count = 0;
   do {
     await new Promise(resolve => setTimeout(() => {
