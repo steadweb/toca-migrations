@@ -2,7 +2,7 @@ const process = require('process');
 const AWS = require("aws-sdk");
 const codebuild = new AWS.CodeBuild({apiVersion: '2016-10-06'});
 
-codebuild.startBuild({ projectName: "bookings-api-dev-toca-social"}, (data) => {
+codebuild.startBuild({ projectName: "bookings-api-dev-toca-social"}, (err, data) => {
   console.log(data);
   
   // const limit = 30; // 5 minutes 
