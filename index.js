@@ -1,7 +1,7 @@
 const process = require('process');
 const AWS = require("aws-sdk");
-const build = new AWS.CodeBuild({});
+const codebuild = new AWS.CodeBuild({apiVersion: '2016-10-06'});
 
-build.startJob({ projectName: "bookings-api-dev-toca-social"}, () => {
+codebuild.startBuild({ projectName: "bookings-api-dev-toca-social"}, () => {
   process.exit(1);
 })
